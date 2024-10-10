@@ -75,13 +75,14 @@ public class AdminDao {
 		return pst.executeUpdate();
 	}
 	
-	public List<Product> getAllProducts() throws ClassNotFoundException, SQLException{
+	public List<Product> getAllProducts(int adminid) throws ClassNotFoundException, SQLException{
 		Connection connection = getConnection();
-		PreparedStatement preparedStatement = connection.prepareStatement("select * from product ");
+		PreparedStatement preparedStatement = connection.prepareStatement("select * from product where adminid=?");
+		preparedStatement.setInt(1, adminid);
 		ResultSet rs = preparedStatement.executeQuery();
 		List<Product> products = new ArrayList<Product>();
 		while (rs.next()) {
-			products.add(new Product(rs.getInt(0), rs.getString(0), rs.getString(0),rs.getString(0), rs.getDouble(0), rs.getDouble(0),rs.getInt(7)));
+			products.add(new Product(rs.getInt(1), rs.getString(2), rs.getString(3),rs.getString(4), rs.getDouble(5), rs.getDouble(6),rs.getInt(7)));
 		}
 		return products;
 	}

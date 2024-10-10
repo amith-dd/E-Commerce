@@ -30,6 +30,7 @@ public class Login extends HttpServlet {
 				if(pass.equals(admin.getAdminPassword())) {
 					HttpSession session = req.getSession();
 					session.setAttribute("admin", admin);
+					req.setAttribute("products", dao.getAllProducts(admin.getAdminId()));
 					req.getRequestDispatcher("home.jsp").forward(req, resp);
 				}else {
 					req.setAttribute("message", "incorrect Password");

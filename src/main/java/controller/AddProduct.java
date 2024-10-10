@@ -36,8 +36,11 @@ public class AddProduct extends HttpServlet{
 		AdminDao dao = new AdminDao();
 		
 		try {
-			dao.saveProduct(product);
+			int adminid = sessionadmin.getAdminId();
 			
+			dao.saveProduct(product);
+			req.setAttribute("products", dao.getAllProducts(adminid));
+			req.getRequestDispatcher("home.jsp").forward(req, resp);
 			
 			
 		} catch (ClassNotFoundException e) {
