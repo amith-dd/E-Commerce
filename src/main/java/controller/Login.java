@@ -28,7 +28,11 @@ public class Login extends HttpServlet {
 			Admin admin = dao.findAdminByEmail(email);
 			if(admin!=null) {
 				if(pass.equals(admin.getAdminPassword())) {
+					
 					HttpSession session = req.getSession();
+					
+					
+					
 					session.setAttribute("admin", admin);
 					req.setAttribute("products", dao.getAllProducts(admin.getAdminId()));
 					req.getRequestDispatcher("home.jsp").forward(req, resp);

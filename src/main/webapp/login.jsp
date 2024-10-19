@@ -47,7 +47,7 @@
             %>
             
             <div class="text-center">
-                <input type="submit" value="Login" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg cursor-pointer">
+                <input type="submit" value="Login" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg cursor-pointer transition transform hover:scale-105 duration-300 ease-in-out">
             </div>
         </form>
     </div>

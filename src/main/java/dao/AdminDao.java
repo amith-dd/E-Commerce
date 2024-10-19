@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dto.Admin;
+import dto.Category;
 import dto.Product;
 
 public class AdminDao {
@@ -86,6 +87,28 @@ public class AdminDao {
 		}
 		return products;
 	}
+	
+	public Product findById(int id) throws SQLException, ClassNotFoundException {
+		Connection connection = getConnection();
+		PreparedStatement preparedStatement = connection.prepareStatement("select * from product where productid=?");
+		preparedStatement.setInt(1, id);
+		ResultSet rs = preparedStatement.executeQuery();
+		
+		if (rs.next()) {
+			return new Product(rs.getInt(1), rs.getString(2), rs.getString(3),rs.getString(4), rs.getDouble(5), rs.getDouble(6),rs.getInt(7));
+		}
+		return null;
+	}
+	
+	public int addCategory(Category cat) throws ClassNotFoundException, SQLException {
+		Connection connection = getConnection();
+		PreparedStatement preparedStatement = connection.prepareStatement("insert into category values(?,?,?)");
+		preparedStatement.setInt(1, cat.getId());
+		preparedStatement.setString(2, cat.getCategory());
+		preparedStatement.setString(3, cat.getSubcategory());
+		return preparedStatement.executeUpdate();
+	}
+	
 	
 	
 

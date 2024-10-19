@@ -14,12 +14,11 @@ import dao.AdminDao;
 import dto.Admin;
 import dto.Product;
 
-@WebServlet("/addproduct")
-public class AddProduct extends HttpServlet{
+@WebServlet("/update")
+public class Update extends HttpServlet{
 	
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		int id = Integer.parseInt(req.getParameter("id"));
 		String name = req.getParameter("name");
@@ -33,14 +32,10 @@ public class AddProduct extends HttpServlet{
 		
 		Product product = new Product(id, name, brand, category, price, discount, sessionadmin.getAdminId());
 		
-		
 		AdminDao dao = new AdminDao();
 		
 		try {
-			int adminid = sessionadmin.getAdminId();
-			
-			dao.saveProduct(product);
-			req.setAttribute("products", dao.getAllProducts(adminid));
+			dao.updateProduct(product);
 			req.getRequestDispatcher("home.jsp").forward(req, resp);
 			
 			
@@ -51,6 +46,7 @@ public class AddProduct extends HttpServlet{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		
 		
 		
